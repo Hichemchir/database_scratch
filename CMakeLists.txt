@@ -9,6 +9,7 @@ add_executable(database_scratch
     src/main.cpp
     src/cli/cli.cpp
     src/db/database.cpp
+    src/db/kv_store.cpp
 )
 
 target_include_directories(database_scratch PUBLIC include)
