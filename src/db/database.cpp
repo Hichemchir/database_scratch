@@ -1,22 +1,25 @@
 #include "database.hpp"
-using namespace std;
+
+namespace db {
 
 void Database::set(const string& key, const string& value) {
-    storage[key] = value;
+    store.set(key,value);
 };
 
 string Database::get(const string& key) const {
-    auto it = storage.find(key);
-    if (it != storage.end()) {
-        return it->second;
+    string value;
+    if (store.get(key, value)) {
+        return value;
     }
     return "";
 }
 
 bool Database::del(const string& key) {
-    return storage.erase(key) > 0;
+    return store.del(key);
 }
 
 bool Database::exists(const string& key) {
-    return (storage.find(key)) == storage.end();
+    return store.exists(key);
+}
+
 }

@@ -1,9 +1,16 @@
 #include <iostream>
-#include "cli.hpp"
 #include <sstream>
-#include <vector>
 
-using namespace std;
+#include "common.hpp"
+#include "database.hpp"
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::istringstream;
+using std::getline;
+
+namespace db {
 
 void CLI::run() {
     string cmd;
@@ -53,7 +60,7 @@ void CLI::handle_command(const string& cmd) {
 
     if (command == "echo") {
         if (tokens.size() > 1) {
-            for (size_t i = 0; i < tokens.size(); i++) {
+            for (size_t i = 1; i < tokens.size(); i++) {
                 cout << tokens[i] << " ";
             }
             cout << endl;
@@ -103,5 +110,6 @@ void CLI::handle_command(const string& cmd) {
         return;
     }
 
-    cout << "Unkown command" << endl;
+    cout << "Unknown command" << endl;
+}
 }
