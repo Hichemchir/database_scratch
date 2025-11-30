@@ -22,5 +22,19 @@ void CLI::run() {
 }
 
 void CLI::handle_command(const std::string& cmd) {
-    std::cout << "You typed: " << cmd << std::endl;
+    if (cmd == "help") {
+        std::cout << "Commands:\n";
+        std::cout << " help     Show this message\n";
+        std::cout << " echo <text> Print text \n";
+        std::cout << " exit     Quit the program\n";
+        return;
+    }    
+
+    if (cmd.rfind("echo ", 0) == 0) {
+        std:: string text = cmd.substr(5);
+        std::cout << text << std::endl;
+        return;
+    }
+
+    std::cout << "Unkown command" << std::endl;
 }
