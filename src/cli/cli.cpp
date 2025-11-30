@@ -1,8 +1,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "common.hpp"
-#include "database.hpp"
+#include "db/common.hpp"
+#include "db/database.hpp"
 
 using std::cout;
 using std::cin;

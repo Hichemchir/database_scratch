@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Executable
 add_executable(database_scratch
     src/main.cpp
-    src/cli.cpp
-    src/database.cpp
+    src/cli/cli.cpp
+    src/db/database.cpp
 )
 
 target_include_directories(database_scratch PUBLIC include)
