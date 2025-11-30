@@ -1,10 +1,13 @@
 #pragma once
 #include "common.hpp"
+#include "kv_store.hpp"
 
 namespace db {
 
 class Database {
 public:
+    Database() = default;
+
     // Insert or replace key
     void set(const string& key, const string& value);
 
@@ -18,7 +21,7 @@ public:
     bool exists(const string& key);
 
 private:
-    unordered_map<string, string> storage;
+    KVStore store;
 };
 
 }

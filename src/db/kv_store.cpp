@@ -2,11 +2,11 @@
 
 namespace db {
 
-void set(const string& key, const string& value) {
+void KVStore::set(const string& key, const string& value) {
     store[key] = value;
 }
 
-string get(const string& key, const string& out_value) {
+bool KVStore::get(const string& key, string& out_value) const {
     auto it = store.find(key);
     if (it != store.end()) {
         out_value = it->second;
@@ -15,11 +15,11 @@ string get(const string& key, const string& out_value) {
     return false;
 }
 
-bool del(const string& key) {
+bool KVStore::del(const string& key) {
     return store.erase(key) > 0;
 }
 
-bool exists(const string& key) {
+bool KVStore::exists(const string& key) const {
     return (store.find(key)) != store.end();
 }
 

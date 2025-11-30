@@ -8,7 +8,7 @@ public:
     KVStore() = default;
 
     void set(const string& key, const string& value);
-    string get(const string& key, const string& out_value) const;
+    bool get(const string& key, string& out_value) const;
     bool del(const string& key);
     bool exists(const string& key) const;
 
