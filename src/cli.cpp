@@ -1,19 +1,23 @@
 #include <iostream>
 #include "cli.hpp"
+#include <sstream>
+#include <vector>
+
+using namespace std;
 
 void CLI::run() {
-    std::string cmd;
+    string cmd;
 
-    std::cout <<"Welcome to database_scratch CLI!" <<std::endl;
+    cout <<"Welcome to database_scratch CLI!" << endl;
 
     while (true) {
-        std::cout << "> ";
+        cout << "> ";
 
-        if (!std::getline(std::cin, cmd)) {
+        if (!getline(cin, cmd)) {
             break;
         }
         if (cmd == "exit") {
-            std::cout <<"Exiting CLI." << std::endl;
+            cout <<"Exiting CLI." << endl;
             break;
         }
 
@@ -21,20 +25,40 @@ void CLI::run() {
     }
 }
 
-void CLI::handle_command(const std::string& cmd) {
-    if (cmd == "help") {
-        std::cout << "Commands:\n";
-        std::cout << " help     Show this message\n";
-        std::cout << " echo <text> Print text \n";
-        std::cout << " exit     Quit the program\n";
+void CLI::handle_command(const string& cmd) {
+    istringstream iss(cmd);
+    vector<string> tokens;
+    string word;
+
+    while (iss >> word) {
+        tokens.push_back(word);
+    }
+    if (tokens.empty()) return;
+
+    const string& command = tokens[0];
+
+    if (command == "help") {
+        cout << "Commands:\n";
+        cout << " help     Show this message\n";
+        cout << " echo <text> Print text \n";
+        cout << " clear    Clean the program\n";
+        cout << " exit     Quit the program\n";
         return;
     }    
 
-    if (cmd.rfind("echo ", 0) == 0) {
-        std:: string text = cmd.substr(5);
-        std::cout << text << std::endl;
+    if (command == "echo") {
+        if (tokens.size() > 1) {
+            for (size_t i = 0; i < tokens.size(); i++) {
+                cout << tokens[i] << " ";
+            }
+            cout << endl;
+        }
         return;
     }
 
-    std::cout << "Unkown command" << std::endl;
+    if (command == "clear") {
+        cout << "\033[2J\033[1;1H";
+        return;
+    }
+    cout << "Unkown command" << endl;
 }
