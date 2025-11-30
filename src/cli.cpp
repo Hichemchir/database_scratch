@@ -60,5 +60,43 @@ void CLI::handle_command(const string& cmd) {
         cout << "\033[2J\033[1;1H";
         return;
     }
+
+    if (command == "set") {
+        if (tokens.size() < 3) {
+            cout << "Usage: <key> <value>\n";
+            return;
+        }
+        db.set(tokens[1], tokens[2]);
+        cout << "OK\n";
+        return;
+    }
+
+    if (command == "get") {
+        if (tokens.size() < 2) {
+            cout << "Usage: get <key>\n";
+            return;
+        }
+        cout << db.get(tokens[1]) << endl;
+        return;
+    }
+
+    if (command == "del") {
+        if (tokens.size() < 2) {
+            cout << "Usage: del <key>\n";
+            return;
+        }
+        cout << (db.del(tokens[1]) ? "1" : "0") << endl;
+        return;
+    }
+
+    if (command == "exists") {
+        if (tokens.size() < 2) {
+            cout << "Usage: exists <key>\n";
+            return;
+        }
+        cout << db.exists(tokens[1]) << endl;
+        return;
+    }
+
     cout << "Unkown command" << endl;
 }
