@@ -43,6 +43,11 @@ void CLI::handle_command(const string& cmd) {
         cout << " echo <text> Print text \n";
         cout << " clear    Clean the program\n";
         cout << " exit     Quit the program\n";
+        cout << " set     Setup key, value for database\n";
+        cout << " get     Value for the key\n";
+        cout << " exists     Check if key exists\n";
+        cout << " del     Delete the key\n";
+
         return;
     }    
 
