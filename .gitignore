@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+# ignore dossier de buil
+/build
+CMakefiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
