@@ -1,6 +1,8 @@
 #include <iostream>
+#include <"cli.hpp">
 
 int main() {
-    std::cout << "Hello world!" << std::endl;
+    CLI cli;
+    cli.run();
     return 0;
 }
