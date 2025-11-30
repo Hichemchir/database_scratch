@@ -3,6 +3,7 @@
 
 #include "db/common.hpp"
 #include "db/database.hpp"
+#include "cli.hpp"
 
 using std::cout;
 using std::cin;
