@@ -1,12 +1,16 @@
 #pragma once
-#include <string>
+#include "db/common.hpp"
 #include "database.hpp"
+
+namespace db {
 
 class CLI {
 public:
     void run();
-    void handle_command(const std::string& cmd);
+    void handle_command(const string& cmd);
 
 private:
     Database db;
 };
+
+}
