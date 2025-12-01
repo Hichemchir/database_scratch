@@ -1,6 +1,7 @@
 #pragma once
 #include "common.hpp"
 #include "kv_store.hpp"
+#include "storage.hpp"
 
 namespace db {
 
@@ -21,7 +22,10 @@ public:
     bool exists(const string& key);
 
 private:
-    KVStore store;
+    unordered_map<string, string> kv;
+    Storage storage;
+
+    void load_from_disk();
 };
 
 }
