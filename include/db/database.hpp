@@ -7,7 +7,7 @@ namespace db {
 
 class Database {
 public:
-    Database() = default;
+    Database();
 
     // Insert or replace key
     void set(const string& key, const string& value);
