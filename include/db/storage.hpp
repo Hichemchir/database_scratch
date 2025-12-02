@@ -6,8 +6,10 @@
 namespace db {
 
 class Storage {
-public: 
+public:
+    // constructor that opens the file
     Storage(const string &filename);
+    // delete the open file, liberate ressources
     ~Storage();
 
     void append_set(const string &key, const string &value);
@@ -16,6 +18,7 @@ public:
     vector<string> load_lines();
 private:
     string filename;
+    // open file in append mode
     std::ofstream file;
 };
 

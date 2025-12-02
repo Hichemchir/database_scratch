@@ -5,7 +5,7 @@ namespace db {
 Storage::Storage(const string &filename)
     : filename(filename), file(filename, std::ios::app)
 {
-    // std::ios::app => toujours append, pas overwrite
+    // std::ios::app => always append, never overwrite
 }    
 
 Storage::~Storage() {
