@@ -2,6 +2,7 @@
 #include "common.hpp"
 #include "kv_store.hpp"
 #include "storage.hpp"
+#include "wal.hpp"
 
 namespace db {
 
@@ -23,7 +24,7 @@ public:
 
 private:
     unordered_map<string, string> kv;
-    Storage storage;
+    WAL wal;
 
     void load_from_disk();
 };

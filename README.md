@@ -1,5 +1,6 @@
 # database_scratch
 
+Schema idea of the db:
              ┌───────────────────────────────────┐
              │             Database               │
              └───────────────┬───────────────────┘
@@ -24,3 +25,7 @@
              ┌──────────────────────────────────────┐
              │        SSTable (sorted, immutable)    │ <── disk compaction
              ────────────────────-───────────────────┘
+
+# For the Write ahead log:
+
+| CRC32 (4 bytes) | Type (1 byte) | KeyLen (4) | ValLen (4) | Key | Value |
