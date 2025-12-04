@@ -4,37 +4,30 @@
 namespace db {
 
 Database::Database()
-    : storage("data.db")
+    : wal("wal.log")
 {
-    load_from_disk();
+    replay_wal();
 }
 
-void Database::load_from_disk() {
-    auto lines = storage.load_lines();
+void Database::replay_wal() {
+    auto records = wal.read_all();
 
-    for (const auto &line : lines) {
-        std::istringstream iss(line);
-        string op, key, value;
-        iss >> op;
+    for (auto &rec : records) {
+        if (!rec.valid)
+            continue;
 
-        if (op == "SET") {
-            iss >> key >> value;
-            kv[key] = value;
-        } else if (op == "DEL") {
-            iss >> key;
-            kv.erase(key);
+        if (rec.op == WalOp::SET) {
+            kv[rec.key] = rec.value;
+        } 
+        else if (rec.op == WalOp::DEL) {
+            kv.erase(rec.key);
         }
     }
 }
 
 void Database::set(const string &key, const string &value) {
     kv[key] = value;
-    storage.append_set(key, value);
-}
-
-string Database::get(const string &key) const {
-    auto it = kv.find(key);
-    return (it != kv.end()) ? it->second : "";
+    wal.write_set(key, value);
 }
 
 bool Database::del(const string &key) {
@@ -42,11 +35,16 @@ bool Database::del(const string &key) {
     if (it == kv.end()) return false;
 
     kv.erase(it);
-    storage.append_del(key);
+    wal.write_del(key);
     return true;
 }
 
-bool Database::exists(const string &key) {
+string Database::get(const string &key) const {
+    auto it = kv.find(key);
+    return (it != kv.end()) ? it->second : "";
+}
+
+bool Database::exists(const string &key) const {
     return kv.find(key) != kv.end();
 }
 

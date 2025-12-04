@@ -31,7 +31,7 @@ private:
     std::ofstream out;
 
     void write_record(WalOp op, const string& key, const string& value);
-    uint32_t crc(const char *data, size_t size);
+    uint32_t crc32(const char *data, size_t size);
 };
 
 }
